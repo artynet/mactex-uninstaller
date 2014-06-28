@@ -27,6 +27,7 @@ MACTEX_TEX_GYRE='org.tug.mactex.tex-gyre'
 PKGS=`sudo pkgutil --pkgs | grep org.tug.mactex`
 PKGS2=`sudo pkgutil --pkgs | grep com.tug.mactex`
 VOLUME=`echo ${PKGS} | xargs sudo /usr/sbin/pkgutil --file-info | grep volume | xargs -I{} expr "{}" : "^volume: \(.*.\)"`
+VOLUME_APP=`ls /Volumes/ | grep -i [M]acintosh | sed 's/ /\\ /g'`
 
 
 # for debug
@@ -124,11 +125,11 @@ remove_app()
 remove_apps()
 {
     _DEBUG "remove_apps) called"
-    applist="`find /Macintosh\ HD/Applications/TeX -name '*.app' -prune`"
+    applist="`find /${VOLUME_APP}/Applications/TeX -name '*.app' -prune`"
     for app in ${applist}; do
         remove_app ${app}
     done
-    remove_item "/Macintosh\ HD/Applications/TeX"
+    remove_item "/${VOLUME_APP}/Applications/TeX"
 }
 
 #
