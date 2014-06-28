@@ -202,6 +202,8 @@ if [ ! -z "`echo ${PKGS} | grep ${MACTEX_GHOSTSCRIPT}`" ]; then
     echo "Done"
 fi
 
+# Fix for Imagemagick
+
 if [ ! -z "`echo ${PKGS} | grep ${MACTEX_IMAGEMAGICK_CONVERT}`" ]; then
     echo "Remove ImageMagick-convert..."
     remove_with_packageid ${MACTEX_IMAGEMAGICK_CONVERT}
