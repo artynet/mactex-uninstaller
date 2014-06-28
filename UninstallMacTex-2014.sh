@@ -2,13 +2,13 @@
 # File Name:    UninstallMacTeX.command
 # Version=1.0
 # Author:       Arturo Rinaldi based on the work of toggtc
-# Created:      06/25/2013
+# Created:      06/25/2014
 # Homepage:     https://github.com/toggtc/mactex-uninstaller
 #
-# WARNING:      This script will remove all files and folders created by MacTex-2013.
-#               And if MacTex-2013 and other TeX exist, this script will not work well.
+# WARNING:      This script will remove all files and folders created by MacTex-2014.
+#               And if MacTex-2014 and other TeX exist, this script will not work well.
 #
-# ChangeLog:    1.0 - Tweaked for MacTeX 2013
+# ChangeLog:    1.0 - Tweaked for MacTeX 2014
 #
 # TODO:         test;)
 #-------------------------------
@@ -17,10 +17,10 @@
 OLDIFS=${IFS}
 IFS=$'\n'
 
-MACTEX_GUI='com.tug.mactex.gui2013'
-MACTEX_TEXLIVE='org.tug.mactex.texlive2013'
-MACTEX_GHOSTSCRIPT='org.tug.mactex.ghostscript9.07'
-MACTEX_IMAGEMAGICK_CONVERT='org.tug.mactex.imagemagick-convert-6.8.3-3'
+MACTEX_GUI='org.tug.mactex.gui2014'
+MACTEX_TEXLIVE='org.tug.mactex.texlive2014'
+MACTEX_GHOSTSCRIPT='org.tug.mactex.ghostscript9.10'
+MACTEX_IMAGEMAGICK_CONVERT='org.tug.mactex.imagemagick-convert-6.8.9-1'
 MACTEX_LATIN_MODERN='org.tug.mactex.latin-modern'
 MACTEX_TEX_GYRE='org.tug.mactex.tex-gyre'
 
@@ -163,7 +163,7 @@ remove_with_packageid()
 # echo "Done"
 
 is_already=1
-if [ ! -z "`echo ${PKGS2} | grep ${MACTEX_GUI}`" ]; then
+if [ ! -z "`echo ${PKGS} | grep ${MACTEX_GUI}`" ]; then
     echo "Remove GUI Applications..."
     remove_apps
     forget ${MACTEX_GUI}
@@ -172,11 +172,11 @@ if [ ! -z "`echo ${PKGS2} | grep ${MACTEX_GUI}`" ]; then
 fi
 
 if [ ! -z "`echo ${PKGS} | grep ${MACTEX_TEXLIVE}`" ]; then
-    echo "Remove TeXLive 2013..."
-    remove_item "${VOLUME}usr/local/texlive/2013"
+    echo "Remove TeXLive 2014..."
+    remove_item "${VOLUME}usr/local/texlive/2014"
     remove_dir_if_empty "/usr/local/texlive"
     if [ ${#} -eq 2 ]; then
-        echo "WARNING: Removed texlive-2013, but other version of TeX exist."
+        echo "WARNING: Removed texlive-2014, but other version of TeX exist."
         echo "         Please change other version of TeX using TeX Distributions pane in System Preferences."
     else
         remove_item "${VOLUME}usr/texbin"
@@ -195,7 +195,7 @@ fi
 if [ ! -z "`echo ${PKGS} | grep ${MACTEX_GHOSTSCRIPT}`" ]; then
     echo "Remove Ghostscript..."
     remove_with_packageid ${MACTEX_GHOSTSCRIPT}
-    remove_item "${VOLUME}usr/local/share/ghostscript/9.07"
+    remove_item "${VOLUME}usr/local/share/ghostscript/9.10"
     remove_dir_if_empty "${VOLUME}usr/local/share/ghostscript"
     forget ${MACTEX_GHOSTSCRIPT}
     is_already=0
@@ -205,9 +205,9 @@ fi
 if [ ! -z "`echo ${PKGS} | grep ${MACTEX_IMAGEMAGICK_CONVERT}`" ]; then
     echo "Remove ImageMagick-convert..."
     remove_with_packageid ${MACTEX_IMAGEMAGICK_CONVERT}
-    remove_item "${VOLUME}usr/local/lib/ImageMagick-6.8.3"
-    # remove_dir_if_empty "${VOLUME}usr/local/lib/ImageMagick-6.8.3"
-    forget ${MACTEX_IMAGEMAGICK_CONVERT}
+    remove_item "${VOLUME}usr/local/lib/ImageMagick-6.8.9"
+    # remove_dir_if_empty "${VOLUME}usr/local/lib/ImageMagick-6.8.9"
+	forget ${MACTEX_IMAGEMAGICK_CONVERT}
     is_already=0
     echo "Done"
 fi
@@ -231,9 +231,9 @@ if [ ! -z "`echo ${PKGS} | grep ${MACTEX_TEX_GYRE}`" ]; then
 fi
 
 if [ ${is_already} -eq 1 ]; then
-    echo "MacTeX-2013 not found."
+    echo "MacTeX-2014 not found."
 else
-    echo "Uninstallation of MacTeX 2013 Complete !"
+    echo "Uninstallation of MacTeX 2014 Complete !"
 fi
 IFS=${OLDIFS}
 
