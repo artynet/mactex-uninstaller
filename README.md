@@ -1,4 +1,6 @@
 mactex-uninstaller
 ==================
 
-Uninstaller script for MacTeX
+Uninstaller script for MacTex
+
+$ sudo sh UninstallMacTex2013.sh
